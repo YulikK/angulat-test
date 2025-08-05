@@ -5,17 +5,13 @@
 </div>
 
 <div class="counter-controls">
-  <app-counter-button
-    label="-"
-    variant="danger"
-    (buttonClick)="onDecrement()"
-  />
-
-  <app-counter-button
-    label="+"
-    variant="success"
-    (buttonClick)="onIncrement()"
-  />
+  @for (button of buttons(); track button.label) {
+    <app-counter-button
+      [label]="button.label"
+      [variant]="button.variant"
+      (buttonClick)="button.action()"
+    />
+  }
 </div>
 
 <router-outlet />

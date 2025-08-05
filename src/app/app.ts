@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   inject,
 } from '@angular/core';
@@ -30,8 +31,26 @@ import { RandomBackground } from './shared/directives/random-background';
 export class App {
   private readonly counterService = inject(CounterService);
   private readonly randomBackground = inject(RandomBackground);
+  private readonly buttonsArray = [
+    {
+      label: '-',
+      variant: 'danger' as const,
+      action: () => this.onDecrement(),
+    },
+    {
+      label: '+',
+      variant: 'success' as const,
+      action: () => this.onIncrement(),
+    },
+  ];
 
   protected readonly count = this.counterService.count;
+
+  protected readonly buttons = computed(() => {
+    const currentCount = this.count();
+    const shouldSwapButtons = currentCount === 10;
+    return shouldSwapButtons ? this.buttonsArray.reverse() : this.buttonsArray;
+  });
 
   constructor() {
     effect(() => {
