@@ -4,6 +4,7 @@ import {
   computed,
   effect,
   inject,
+  signal,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CounterService } from './services/counter.service';
@@ -31,6 +32,8 @@ import { RandomBackground } from './shared/directives/random-background';
 export class App {
   private readonly counterService = inject(CounterService);
   private readonly randomBackground = inject(RandomBackground);
+  private readonly shouldSwap = signal(false);
+
   private readonly buttonsArray = [
     {
       label: '-',
@@ -47,15 +50,21 @@ export class App {
   protected readonly count = this.counterService.count;
 
   protected readonly buttons = computed(() => {
-    const currentCount = this.count();
-    const shouldSwapButtons = currentCount === 10;
-    return shouldSwapButtons ? this.buttonsArray.reverse() : this.buttonsArray;
+    return this.shouldSwap()
+      ? [...this.buttonsArray].reverse()
+      : this.buttonsArray;
   });
 
   constructor() {
     effect(() => {
       this.count();
       this.randomBackground.changeBackground();
+    });
+
+    effect(() => {
+      if (this.count() === 10) {
+        this.shouldSwap.update((current) => !current);
+      }
     });
   }
 
