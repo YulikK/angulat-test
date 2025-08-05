@@ -1,4 +1,5 @@
-import { Directive, ElementRef, inject, Renderer2 } from '@angular/core';
+import { Directive, inject, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Directive({
   selector: '[appRandomBackground]',
@@ -6,8 +7,8 @@ import { Directive, ElementRef, inject, Renderer2 } from '@angular/core';
   exportAs: 'randomBackground',
 })
 export class RandomBackground {
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly renderer = inject(Renderer2);
+  private readonly document = inject(DOCUMENT);
 
   public changeBackground(): void {
     this.setRandomBackground();
@@ -16,11 +17,7 @@ export class RandomBackground {
   private setRandomBackground(): void {
     const gradient = this.generateRandomGradient();
 
-    this.renderer.setStyle(
-      this.elementRef.nativeElement,
-      'background',
-      gradient,
-    );
+    this.renderer.setStyle(this.document.body, 'background', gradient);
   }
 
   private generateRandomGradient(): string {
