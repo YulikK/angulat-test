@@ -1,7 +1,9 @@
 .character-card {
   width: 280px;
   margin: 16px;
-  transition: transform 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   border-radius: 16px;
 
   &:hover {
@@ -32,19 +34,6 @@
   box-shadow: var(--mat-sys-elevation-level2);
 }
 
-.drag-button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: var(--mat-sys-secondary-fixed);
-  color: var(--mat-sys-on-surface-variant);
-
-  &:hover {
-    background-color: var(--mat-sys-secondary-fixed-dim);
-    color: var(--mat-sys-on-primary-container);
-  }
-}
-
 .card-content {
   padding: 16px !important;
   text-align: center;
@@ -65,7 +54,7 @@
   margin-top: 12px;
 }
 
-mat-chip-option {
+mat-chip {
   font-size: 0.875rem;
 }
 

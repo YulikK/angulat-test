@@ -1,16 +1,8 @@
-<mat-card class="character-card">
+<mat-card class="character-card" [class.drag-active]="isDragActive()">
   <div class="card-header">
     <div class="avatar-container">
       <img [src]="character().avatar" [alt]="character().name" class="avatar" />
     </div>
-    <button
-      mat-icon-button
-      class="drag-button"
-      (click)="onToggleDragMode()"
-      matTooltip="Enable drag mode"
-    >
-      <mat-icon>drag_indicator</mat-icon>
-    </button>
   </div>
 
   <mat-card-content class="card-content">

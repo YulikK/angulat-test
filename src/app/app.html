@@ -3,11 +3,31 @@
   <span class="header-title">{{ title }}</span>
 </mat-toolbar>
 
-<div class="characters-container">
+<div
+  class="characters-container"
+  cdkDropList
+  cdkDropListLockAxis="y"
+  (cdkDropListDropped)="onDrop($event)"
+>
   @for (character of characters(); track character.id) {
-    <app-character-card
-      [character]="character"
-      (dragModeToggled)="onDragModeToggled($event)"
-    />
+    <div cdkDrag class="drag-container" [cdkDragScale]="1" #dragElement>
+      <div class="character-wrapper" [attr.data-character-id]="character.id">
+        <app-character-card [character]="character" />
+        <button
+          mat-icon-button
+          class="drag-button"
+          matTooltip="Drag to reorder"
+          cdkDragHandle
+        >
+          <mat-icon>drag_indicator</mat-icon>
+        </button>
+      </div>
+
+      <div *cdkDragPreview class="custom-drag-preview">
+        <div class="preview-wrapper">
+          <app-character-card [character]="character" />
+        </div>
+      </div>
+    </div>
   }
 </div>

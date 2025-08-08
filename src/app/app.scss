@@ -27,7 +27,8 @@
 
 .characters-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding: 24px;
   gap: 16px;
@@ -35,13 +36,58 @@
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
-  .characters-container {
-    padding: 16px;
-    gap: 12px;
+.character-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.character-item {
+  position: relative;
+}
+
+.drag-container {
+  position: relative;
+}
+
+.drag-button {
+  background-color: var(--mat-sys-secondary-fixed);
+  color: var(--mat-sys-on-surface-variant);
+  transition: all 0.2s ease-in-out;
+  cursor: grab;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: var(--mat-sys-secondary-fixed-dim);
+    color: var(--mat-sys-on-primary-container);
+    transform: scale(1.1);
   }
 
-  .header-title {
-    font-size: 1.25rem;
+  &:active {
+    cursor: grabbing;
+    background-color: var(--mat-sys-secondary-fixed-dim);
   }
+}
+
+.custom-drag-preview .preview-wrapper {
+  animation: shrink-in-smooth 0.2s ease-out forwards;
+  transform-origin: left top;
+  opacity: 0.9;
+}
+
+@keyframes shrink-in-smooth {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.6);
+  }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.4;
+  background: var(--mat-sys-surface-variant);
+  border: 2px dashed var(--mat-sys-outline);
+  border-radius: 16px;
 }
