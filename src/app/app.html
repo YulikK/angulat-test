@@ -10,8 +10,8 @@
   (cdkDropListDropped)="onDrop($event)"
 >
   @for (character of characters(); track character.id) {
-    <div cdkDrag class="drag-container" [cdkDragScale]="1" #dragElement>
-      <div class="character-wrapper" [attr.data-character-id]="character.id">
+    <div cdkDrag class="drag-container">
+      <div class="character-wrapper">
         <app-character-card [character]="character" />
         <button
           mat-icon-button
@@ -21,12 +21,6 @@
         >
           <mat-icon>drag_indicator</mat-icon>
         </button>
-      </div>
-
-      <div *cdkDragPreview class="custom-drag-preview">
-        <div class="preview-wrapper">
-          <app-character-card [character]="character" />
-        </div>
       </div>
     </div>
   }
