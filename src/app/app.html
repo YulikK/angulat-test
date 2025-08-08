@@ -1,3 +1,13 @@
-<h1>{{ title }}</h1>
+<mat-toolbar class="app-header">
+  <mat-icon class="header-icon">stars</mat-icon>
+  <span class="header-title">{{ title }}</span>
+</mat-toolbar>
 
-<router-outlet />
+<div class="characters-container">
+  @for (character of characters(); track character.id) {
+    <app-character-card
+      [character]="character"
+      (dragModeToggled)="onDragModeToggled($event)"
+    />
+  }
+</div>

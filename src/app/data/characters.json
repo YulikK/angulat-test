@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Iron Man",
+    "avatar": "iron-man.png",
+    "tags": ["Genius", "Billionaire", "Philanthropist", "Technology"]
+  },
+  {
+    "id": 2,
+    "name": "Captain America",
+    "avatar": "captain-america.png",
+    "tags": ["Leader", "Honesty", "Justice", "Shield"]
+  },
+  {
+    "id": 3,
+    "name": "Black Panther",
+    "avatar": "black-panther.png",
+    "tags": ["King", "Wakandan Tech", "Agility", "Wisdom"]
+  },
+  {
+    "id": 4,
+    "name": "Ant-Man",
+    "avatar": "ant-man.png",
+    "tags": ["Shrinking", "Humor", "Father", "Pym Particles"]
+  },
+  {
+    "id": 5,
+    "name": "Deadpool",
+    "avatar": "deadpool.png",
+    "tags": ["Humor", "Immortality", "Madness", "Fourth Wall"]
+  }
+]
