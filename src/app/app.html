@@ -1,0 +1,27 @@
+<mat-toolbar class="app-header">
+  <mat-icon class="header-icon">stars</mat-icon>
+  <span class="header-title">{{ title }}</span>
+</mat-toolbar>
+
+<div
+  class="characters-container"
+  cdkDropList
+  cdkDropListLockAxis="y"
+  (cdkDropListDropped)="onDrop($event)"
+>
+  @for (character of characters(); track character.id) {
+    <div cdkDrag class="drag-container">
+      <div class="character-wrapper">
+        <app-character-card [character]="character" />
+        <button
+          mat-icon-button
+          class="drag-button"
+          matTooltip="Drag to reorder"
+          cdkDragHandle
+        >
+          <mat-icon>drag_indicator</mat-icon>
+        </button>
+      </div>
+    </div>
+  }
+</div>

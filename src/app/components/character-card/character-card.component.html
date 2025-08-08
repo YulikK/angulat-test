@@ -1,0 +1,19 @@
+<mat-card class="character-card" [class.drag-active]="isDragActive()">
+  <div class="card-header">
+    <div class="avatar-container">
+      <img [src]="character().avatar" [alt]="character().name" class="avatar" />
+    </div>
+  </div>
+
+  <mat-card-content class="card-content">
+    <h3 class="character-name">{{ character().name }}</h3>
+
+    <div class="tags-container">
+      <mat-chip-set>
+        @for (tag of character().tags; track tag) {
+          <mat-chip>{{ tag }}</mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,122 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--mat-sys-surface-container);
+}
+
+.app-header {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--mat-sys-elevation-level2);
+}
+
+.header-icon {
+  margin-right: 16px;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.characters-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.character-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.character-item {
+  position: relative;
+}
+
+.cdk-drop-list-dragging {
+  cursor: grabbing;
+}
+
+.cdk-drag-preview .character-wrapper app-character-card {
+  animation: shrink-smooth-delayed 0.4s ease-out forwards;
+}
+
+.cdk-drag-animating .character-wrapper app-character-card {
+  animation: grow-back-to-normal 0.4s ease-out forwards;
+}
+
+.cdk-drop-list-dragging .cdk-drag,
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.drag-button {
+  background-color: var(--mat-sys-secondary-fixed);
+  color: var(--mat-sys-on-surface-variant);
+  transition: all 0.2s ease-in-out;
+  cursor: grab;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: var(--mat-sys-secondary-fixed-dim);
+    color: var(--mat-sys-on-primary-container);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    cursor: grabbing;
+    background-color: var(--mat-sys-secondary-fixed-dim);
+  }
+}
+
+@keyframes shrink-smooth-delayed {
+  0% {
+    transform: translateX(0) scale(1);
+
+    opacity: 1;
+  }
+  20% {
+    transform: translateX(10%) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(25%) scale(0.6);
+    opacity: 0.7;
+  }
+}
+
+@keyframes grow-back-to-normal {
+  0% {
+    transform: translateX(25%) scale(0.6);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(10%) scale(1);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.4;
+  background: var(--mat-sys-surface-variant);
+  border: 2px dashed var(--mat-sys-outline);
+  border-radius: 16px;
+}
