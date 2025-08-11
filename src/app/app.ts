@@ -16,6 +16,9 @@ import { CharacterCardComponent } from './components/character-card/character-ca
 import { CharacterService } from './services/character.service';
 import type { Character } from './models/character';
 
+// Constants
+const DROP_TARGET_DISTANCE_THRESHOLD = 40;
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -49,16 +52,6 @@ export class App {
   }
 
   protected onDragEnded(): void {
-    document.body.classList.remove('dropping-to-separator');
-
-    const allDragElements = document.querySelectorAll(
-      '.cdk-drag, .cdk-drag-animating',
-    );
-    allDragElements.forEach((el) => {
-      (el as HTMLElement).style.transition = '';
-      (el as HTMLElement).style.transform = '';
-    });
-
     this.dropTargetIndex.set(null);
     this.draggedItemIndex.set(null);
     this.isDragging.set(false);
@@ -76,7 +69,7 @@ export class App {
       const sepCenterY = sepRect.top + sepRect.height / 2;
       const distance = Math.abs(previewY - sepCenterY);
 
-      if (distance < 40 && distance < minDistance) {
+      if (distance < DROP_TARGET_DISTANCE_THRESHOLD && distance < minDistance) {
         minDistance = distance;
         targetIndex = index;
       }
@@ -91,8 +84,7 @@ export class App {
     if (targetIndex !== null) {
       const preview = document.querySelector('.cdk-drag-preview');
       if (preview) {
-        (preview as HTMLElement).style.opacity = '0';
-        (preview as HTMLElement).style.transition = 'opacity 0.1s ease-out';
+        preview.remove();
       }
 
       const characters = this._characters();
@@ -111,8 +103,6 @@ export class App {
           this._characters.set([...characters]);
         }
       }
-    } else {
-      console.log('No active separator, item stays in place');
     }
   }
 }
