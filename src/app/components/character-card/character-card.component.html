@@ -8,12 +8,8 @@
   <mat-card-content class="card-content">
     <h3 class="character-name">{{ character().name }}</h3>
 
-    <div class="tags-container">
-      <mat-chip-set>
-        @for (tag of character().tags; track tag) {
-          <mat-chip>{{ tag }}</mat-chip>
-        }
-      </mat-chip-set>
+    <div class="description-container">
+      <p class="character-description">{{ character().description }}</p>
     </div>
   </mat-card-content>
 </mat-card>

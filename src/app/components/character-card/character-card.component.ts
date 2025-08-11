@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -12,7 +11,6 @@ import { Character } from '../../models/character';
   standalone: true,
   imports: [
     MatCardModule,
-    MatChipsModule,
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,

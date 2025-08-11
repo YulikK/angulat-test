@@ -3,30 +3,30 @@
     "id": 1,
     "name": "Iron Man",
     "avatar": "iron-man.png",
-    "tags": ["Genius", "Billionaire", "Philanthropist", "Technology"]
+    "description": "Brilliant inventor and philanthropist Tony Stark created revolutionary armor that transformed him into one of the greatest superheroes. His sharp mind and technological innovations make him an indispensable member of the Avengers team."
   },
   {
     "id": 2,
     "name": "Captain America",
     "avatar": "captain-america.png",
-    "tags": ["Leader", "Honesty", "Justice", "Shield"]
+    "description": "Steve Rogers embodies the ideals of justice and honor. Thanks to the super-soldier serum, he gained incredible strength and endurance, but his main weapon is his unwavering moral stance and ability to inspire others to heroic deeds."
   },
   {
     "id": 3,
     "name": "Black Panther",
     "avatar": "black-panther.png",
-    "tags": ["King", "Wakandan Tech", "Agility", "Wisdom"]
+    "description": "King of Wakanda T'Challa combines the wisdom of a ruler and the strength of a warrior. Protected by the mystical heart-shaped herb and advanced Wakandan technology, he is the guardian of ancient traditions and progressive future."
   },
   {
     "id": 4,
     "name": "Ant-Man",
     "avatar": "ant-man.png",
-    "tags": ["Shrinking", "Humor", "Father", "Pym Particles"]
+    "description": "Scott Lang, a caring father and former criminal, gained the ability to change his size thanks to Pym particles. His humor and humanity help the team in the most difficult situations, while his unique abilities open up new tactical possibilities."
   },
   {
     "id": 5,
     "name": "Deadpool",
     "avatar": "deadpool.png",
-    "tags": ["Humor", "Immortality", "Madness", "Fourth Wall"]
+    "description": "Wade Wilson is an antihero with regenerative abilities and a tendency to break the fourth wall. His unpredictability and dark humor make every appearance memorable, despite the chaotic nature of his crime-fighting methods."
   }
 ]
