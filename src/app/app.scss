@@ -84,11 +84,6 @@
 .cdk-drop-list-dragging {
   cursor: grabbing;
 
-  .cdk-drag:not(.cdk-drag-preview) {
-    transition: none !important;
-    transform: none !important;
-  }
-
   * {
     cursor: grabbing;
   }

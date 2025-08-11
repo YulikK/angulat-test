@@ -3,7 +3,12 @@
   <span class="header-title">{{ title }}</span>
 </mat-toolbar>
 
-<div class="characters-container" cdkDropList cdkDropListLockAxis="y">
+<div
+  class="characters-container"
+  cdkDropList
+  cdkDropListLockAxis="y"
+  cdkDropListSortingDisabled="true"
+>
   <div
     class="drop-separator"
     [class.drop-target-active]="dropTargetIndex() === 0"
