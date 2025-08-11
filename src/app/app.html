@@ -3,14 +3,24 @@
   <span class="header-title">{{ title }}</span>
 </mat-toolbar>
 
-<div
-  class="characters-container"
-  cdkDropList
-  cdkDropListLockAxis="y"
-  (cdkDropListDropped)="onDrop($event)"
->
-  @for (character of characters(); track character.id) {
-    <div cdkDrag class="drag-container">
+<div class="characters-container" cdkDropList cdkDropListLockAxis="y">
+  <div
+    class="drop-separator"
+    [class.drop-target-active]="dropTargetIndex() === 0"
+    [class.visible]="isDragging()"
+  ></div>
+
+  @for (character of characters(); track character.id; let i = $index) {
+    <div
+      cdkDrag
+      class="drag-container"
+      [cdkDragDisabled]="false"
+      cdkDropListDisabled="true"
+      (cdkDragStarted)="onDragStarted(i)"
+      (cdkDragEnded)="onDragEnded()"
+      (cdkDragMoved)="onDragMoved($event)"
+      (cdkDragReleased)="onDragReleased()"
+    >
       <div class="character-wrapper">
         <app-character-card [character]="character" />
         <button
@@ -23,5 +33,11 @@
         </button>
       </div>
     </div>
+
+    <div
+      class="drop-separator"
+      [class.drop-target-active]="dropTargetIndex() === i + 1"
+      [class.visible]="isDragging()"
+    ></div>
   }
 </div>
