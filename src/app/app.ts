@@ -3,6 +3,9 @@ import {
   Component,
   inject,
   signal,
+  ViewChildren,
+  QueryList,
+  ElementRef,
 } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,6 +42,10 @@ export class App {
     this.characterService.characters(),
   );
 
+  @ViewChildren('dropSeparator') separators!: QueryList<
+    ElementRef<HTMLDivElement>
+  >;
+
   protected dropTargetIndex = signal<number | null>(null);
   protected draggedItemIndex = signal<number | null>(null);
   protected isDragging = signal<boolean>(false);
@@ -60,18 +67,24 @@ export class App {
   protected onDragMoved(event: CdkDragMove): void {
     const previewY = event.pointerPosition.y;
 
-    const separators = document.querySelectorAll('.drop-separator.visible');
+    const separatorElements = this.separators.toArray();
     let targetIndex: number | null = null;
     let minDistance = Infinity;
 
-    separators.forEach((separator, index) => {
-      const sepRect = separator.getBoundingClientRect();
-      const sepCenterY = sepRect.top + sepRect.height / 2;
-      const distance = Math.abs(previewY - sepCenterY);
+    separatorElements.forEach((separatorRef, index) => {
+      const separator = separatorRef.nativeElement;
+      if (separator.classList.contains('visible')) {
+        const sepRect = separator.getBoundingClientRect();
+        const sepCenterY = sepRect.top + sepRect.height / 2;
+        const distance = Math.abs(previewY - sepCenterY);
 
-      if (distance < DROP_TARGET_DISTANCE_THRESHOLD && distance < minDistance) {
-        minDistance = distance;
-        targetIndex = index;
+        if (
+          distance < DROP_TARGET_DISTANCE_THRESHOLD &&
+          distance < minDistance
+        ) {
+          minDistance = distance;
+          targetIndex = index;
+        }
       }
     });
 
@@ -82,11 +95,6 @@ export class App {
     const targetIndex = this.dropTargetIndex();
 
     if (targetIndex !== null) {
-      const preview = document.querySelector('.cdk-drag-preview');
-      if (preview) {
-        preview.remove();
-      }
-
       const characters = this._characters();
       const draggedIndex = this.draggedItemIndex();
 
