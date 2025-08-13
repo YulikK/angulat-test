@@ -12,6 +12,8 @@
   <div
     #dropSeparator
     class="drop-separator"
+    appVisibilityTracker
+    (visibilityChanged)="onSeparatorVisibilityChanged(0, $event)"
     [class.drop-target-active]="dropTargetIndex() === 0"
     [class.visible]="isDragging()"
   ></div>
@@ -41,6 +43,8 @@
     <div
       #dropSeparator
       class="drop-separator"
+      appVisibilityTracker
+      (visibilityChanged)="onSeparatorVisibilityChanged(i + 1, $event)"
       [class.drop-target-active]="dropTargetIndex() === i + 1"
       [class.visible]="isDragging()"
     ></div>

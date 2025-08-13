@@ -17,9 +17,9 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CharacterCardComponent } from './components/character-card/character-card.component';
 import { CharacterService } from './services/character.service';
+import { VisibilityTrackerDirective } from './directives/visibility-tracker.directive';
 import type { Character } from './models/character';
 
-// Constants
 const DROP_TARGET_DISTANCE_THRESHOLD = 40;
 
 @Component({
@@ -31,6 +31,7 @@ const DROP_TARGET_DISTANCE_THRESHOLD = 40;
     MatButtonModule,
     CharacterCardComponent,
     DragDropModule,
+    VisibilityTrackerDirective,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -48,10 +49,26 @@ export class App {
 
   protected dropTargetIndex = signal<number | null>(null);
   protected draggedItemIndex = signal<number | null>(null);
-  protected isDragging = signal<boolean>(false);
+  protected isDragging = signal(false);
+  protected visibleSeparatorIndices = signal<Set<number>>(new Set());
 
   protected readonly title = 'My Personal Top Characters';
   protected readonly characters = this._characters.asReadonly();
+
+  protected onSeparatorVisibilityChanged(
+    index: number,
+    isVisible: boolean,
+  ): void {
+    const currentVisible = new Set(this.visibleSeparatorIndices());
+
+    if (isVisible) {
+      currentVisible.add(index);
+    } else {
+      currentVisible.delete(index);
+    }
+
+    this.visibleSeparatorIndices.set(currentVisible);
+  }
 
   protected onDragStarted(index: number): void {
     this.draggedItemIndex.set(index);
@@ -66,25 +83,25 @@ export class App {
 
   protected onDragMoved(event: CdkDragMove): void {
     const previewY = event.pointerPosition.y;
+    const visibleIndices = this.visibleSeparatorIndices();
+    const allSeparators = this.separators.toArray();
 
-    const separatorElements = this.separators.toArray();
     let targetIndex: number | null = null;
     let minDistance = Infinity;
 
-    separatorElements.forEach((separatorRef, index) => {
-      const separator = separatorRef.nativeElement;
-      if (separator.classList.contains('visible')) {
-        const sepRect = separator.getBoundingClientRect();
-        const sepCenterY = sepRect.top + sepRect.height / 2;
-        const distance = Math.abs(previewY - sepCenterY);
+    visibleIndices.forEach((separatorIndex) => {
+      const separatorRef = allSeparators[separatorIndex];
+      if (!separatorRef) return;
 
-        if (
-          distance < DROP_TARGET_DISTANCE_THRESHOLD &&
-          distance < minDistance
-        ) {
-          minDistance = distance;
-          targetIndex = index;
-        }
+      const separator = separatorRef.nativeElement;
+
+      const sepRect = separator.getBoundingClientRect();
+      const sepCenterY = sepRect.top + sepRect.height / 2;
+      const distance = Math.abs(previewY - sepCenterY);
+
+      if (distance < DROP_TARGET_DISTANCE_THRESHOLD && distance < minDistance) {
+        minDistance = distance;
+        targetIndex = separatorIndex;
       }
     });
 
