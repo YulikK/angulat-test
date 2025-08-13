@@ -12,10 +12,8 @@
   <div
     #dropSeparator
     class="drop-separator"
-    appVisibilityTracker
-    (visibilityChanged)="onSeparatorVisibilityChanged(0, $event)"
     [class.drop-target-active]="dropTargetIndex() === 0"
-    [class.visible]="isDragging()"
+    [class.visible]="isDragging"
   ></div>
 
   @for (character of characters(); track character.id; let i = $index) {
@@ -23,8 +21,8 @@
       cdkDrag
       class="drag-container"
       (cdkDragStarted)="onDragStarted(i)"
-      (cdkDragEnded)="onDragEnded()"
       (cdkDragMoved)="onDragMoved($event)"
+      (cdkDragEnded)="onDragEnded()"
       (cdkDragReleased)="onDragReleased()"
     >
       <div class="character-wrapper">
@@ -43,10 +41,8 @@
     <div
       #dropSeparator
       class="drop-separator"
-      appVisibilityTracker
-      (visibilityChanged)="onSeparatorVisibilityChanged(i + 1, $event)"
       [class.drop-target-active]="dropTargetIndex() === i + 1"
-      [class.visible]="isDragging()"
+      [class.visible]="isDragging"
     ></div>
   }
 </div>

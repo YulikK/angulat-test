@@ -3,9 +3,9 @@ import {
   Component,
   inject,
   signal,
-  ViewChildren,
-  QueryList,
   ElementRef,
+  effect,
+  viewChildren,
 } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,10 +17,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { CharacterCardComponent } from './components/character-card/character-card.component';
 import { CharacterService } from './services/character.service';
-import { VisibilityTrackerDirective } from './directives/visibility-tracker.directive';
+import { DragDropService } from './services/drag-drop.service';
 import type { Character } from './models/character';
-
-const DROP_TARGET_DISTANCE_THRESHOLD = 40;
 
 @Component({
   selector: 'app-root',
@@ -31,7 +29,6 @@ const DROP_TARGET_DISTANCE_THRESHOLD = 40;
     MatButtonModule,
     CharacterCardComponent,
     DragDropModule,
-    VisibilityTrackerDirective,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -39,77 +36,54 @@ const DROP_TARGET_DISTANCE_THRESHOLD = 40;
 })
 export class App {
   private readonly characterService = inject(CharacterService);
+  private readonly dragDropService = inject(DragDropService);
   private readonly _characters = signal<Character[]>(
     this.characterService.characters(),
   );
 
-  @ViewChildren('dropSeparator') separators!: QueryList<
-    ElementRef<HTMLDivElement>
-  >;
+  private readonly separators =
+    viewChildren<ElementRef<HTMLDivElement>>('dropSeparator');
 
-  protected dropTargetIndex = signal<number | null>(null);
   protected draggedItemIndex = signal<number | null>(null);
-  protected isDragging = signal(false);
-  protected visibleSeparatorIndices = signal<Set<number>>(new Set());
 
   protected readonly title = 'My Personal Top Characters';
   protected readonly characters = this._characters.asReadonly();
 
-  protected onSeparatorVisibilityChanged(
-    index: number,
-    isVisible: boolean,
-  ): void {
-    const currentVisible = new Set(this.visibleSeparatorIndices());
+  protected get dropTargetIndex() {
+    return this.dragDropService.dropTargetIndex;
+  }
 
-    if (isVisible) {
-      currentVisible.add(index);
-    } else {
-      currentVisible.delete(index);
-    }
+  protected get isDragging() {
+    return this.draggedItemIndex() !== null;
+  }
 
-    this.visibleSeparatorIndices.set(currentVisible);
+  constructor() {
+    effect(() => {
+      const separatorElements = this.separators();
+      if (separatorElements.length > 0) {
+        this.dragDropService.initializeSeparators([...separatorElements]);
+      }
+    });
   }
 
   protected onDragStarted(index: number): void {
     this.draggedItemIndex.set(index);
-    this.isDragging.set(true);
-  }
-
-  protected onDragEnded(): void {
-    this.dropTargetIndex.set(null);
-    this.draggedItemIndex.set(null);
-    this.isDragging.set(false);
   }
 
   protected onDragMoved(event: CdkDragMove): void {
-    const previewY = event.pointerPosition.y;
-    const visibleIndices = this.visibleSeparatorIndices();
-    const allSeparators = this.separators.toArray();
+    this.dragDropService.updateDragPosition(
+      event.pointerPosition.x,
+      event.pointerPosition.y,
+    );
+  }
 
-    let targetIndex: number | null = null;
-    let minDistance = Infinity;
-
-    visibleIndices.forEach((separatorIndex) => {
-      const separatorRef = allSeparators[separatorIndex];
-      if (!separatorRef) return;
-
-      const separator = separatorRef.nativeElement;
-
-      const sepRect = separator.getBoundingClientRect();
-      const sepCenterY = sepRect.top + sepRect.height / 2;
-      const distance = Math.abs(previewY - sepCenterY);
-
-      if (distance < DROP_TARGET_DISTANCE_THRESHOLD && distance < minDistance) {
-        minDistance = distance;
-        targetIndex = separatorIndex;
-      }
-    });
-
-    this.dropTargetIndex.set(targetIndex);
+  protected onDragEnded(): void {
+    this.draggedItemIndex.set(null);
+    this.dragDropService.dropTargetIndex.set(null);
   }
 
   protected onDragReleased(): void {
-    const targetIndex = this.dropTargetIndex();
+    const targetIndex = this.dragDropService.dropTargetIndex();
 
     if (targetIndex !== null) {
       const characters = this._characters();
