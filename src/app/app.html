@@ -7,10 +7,24 @@
   class="characters-container"
   cdkDropList
   cdkDropListLockAxis="y"
-  (cdkDropListDropped)="onDrop($event)"
+  cdkDropListSortingDisabled="true"
 >
-  @for (character of characters(); track character.id) {
-    <div cdkDrag class="drag-container">
+  <div
+    #dropSeparator
+    class="drop-separator"
+    [class.drop-target-active]="dropTargetIndex() === 0"
+    [class.visible]="isDragging"
+  ></div>
+
+  @for (character of characters(); track character.id; let i = $index) {
+    <div
+      cdkDrag
+      class="drag-container"
+      (cdkDragStarted)="onDragStarted(i)"
+      (cdkDragMoved)="onDragMoved($event)"
+      (cdkDragEnded)="onDragEnded()"
+      (cdkDragReleased)="onDragReleased()"
+    >
       <div class="character-wrapper">
         <app-character-card [character]="character" />
         <button
@@ -23,5 +37,12 @@
         </button>
       </div>
     </div>
+
+    <div
+      #dropSeparator
+      class="drop-separator"
+      [class.drop-target-active]="dropTargetIndex() === i + 1"
+      [class.visible]="isDragging"
+    ></div>
   }
 </div>
