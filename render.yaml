@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: worker-dashboard-backend
+    runtime: node
+    plan: free
+    buildCommand: npm run build:server
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
