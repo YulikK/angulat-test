@@ -41,10 +41,11 @@ export enum MESSAGE {
 }
 
 export enum SOCKET_EVENT {
-  CONNECTION = 'connection',
-  DISCONNECT = 'disconnect',
+  CONNECTING = 'connecting',
+  CONNECT = 'connect',
+  DISCONNECT = 'disconnected',
   MESSAGE = 'message',
-  CONNECT_ERROR = 'connect_error',
+  CONNECT_ERROR = 'connect error',
 }
 
 export enum WORKER_EVENT {

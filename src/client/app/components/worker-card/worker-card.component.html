@@ -1,0 +1,61 @@
+<mat-card class="worker-card" [class.terminated]="isTerminated()">
+  <mat-card-header>
+    <div mat-card-avatar class="worker-avatar">
+      <mat-icon>{{ worker().status | statusIcon }}</mat-icon>
+    </div>
+    <mat-card-title class="worker-title">
+      🔮 Session #{{ shortId() }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <mat-chip [color]="worker().status | statusColor" selected>
+        <mat-icon matChipAvatar>{{ worker().status | statusIcon }}</mat-icon>
+        {{ worker().status | statusText }}
+      </mat-chip>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="worker-info">
+      <div class="info-row">
+        <mat-icon>schedule</mat-icon>
+        <span>Started: {{ worker().startTime | date: "short" }}</span>
+      </div>
+      <div class="info-row">
+        <mat-icon>timer</mat-icon>
+        <span>Uptime: {{ worker().startTime | uptime }}</span>
+      </div>
+      <div class="info-row">
+        <mat-icon>receipt</mat-icon>
+        <span>Predictions: {{ totalPredictions() }}</span>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="fortune-section">
+      <h4>
+        📜
+        {{ "All predictions" }}
+        ({{ totalPredictions() }}):
+      </h4>
+      @let displayLogs = worker().logs | recentLogs;
+      @if (displayLogs.length > 0) {
+        <div class="fortune-logs">
+          @for (log of displayLogs; track log.timestamp) {
+            <div class="fortune-entry">
+              <div class="fortune-time">
+                {{ log.timestamp | date: "HH:mm:ss" }}
+              </div>
+              <div class="fortune-text">{{ log.message }}</div>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="no-fortunes">
+          <mat-icon>hourglass_empty</mat-icon>
+          <span>Session is ready...</span>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

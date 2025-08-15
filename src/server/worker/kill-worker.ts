@@ -3,7 +3,7 @@ import {
   ServerWorkersMap,
   WORKER_STATUS,
   WorkerThreadMessage,
-} from '../../../shared/types';
+} from '../../shared/types';
 
 export function killWorker(
   workers: ServerWorkersMap,

@@ -6,9 +6,9 @@ import {
   WORKER_EVENT,
   WORKER_STATUS,
   WorkerInfo,
-} from '../../../shared/types';
-import { handleWorkerMessage } from '../handlers/message-handler';
-import { handleWorkerExit } from '../handlers/exit-handler';
+} from '../../shared/types';
+import { handleWorkerMessage } from './handlers/message-handler';
+import { handleWorkerExit } from './handlers/exit-handler';
 
 import path from 'node:path';
 
@@ -24,7 +24,7 @@ export function createWorker(
     logs: [],
   };
 
-  const workerPath = path.join(__dirname, 'worker.js');
+  const workerPath = path.resolve(__dirname, 'worker.js');
   const worker = new Worker(workerPath);
 
   worker.on(WORKER_EVENT.MESSAGE, (message) => {

@@ -6,8 +6,8 @@ import {
   ServerWorkersMap,
   SOCKET_EVENT,
 } from '../../../shared/types.js';
-import { createWorker } from '../../worker/actions/create-worker.js';
-import { killWorker } from '../../worker/actions/kill-worker.js';
+import { createWorker } from '../../worker/create-worker.js';
+import { killWorker } from '../../worker/kill-worker.js';
 import { SERVER_MESSAGES } from '../../../shared/constants/messages.js';
 
 export function handleClientMessage(

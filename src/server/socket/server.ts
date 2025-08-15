@@ -20,7 +20,7 @@ export function createSocketServer(workers: ServerWorkersMap): SocketServer {
     ),
   );
 
-  io.on(SOCKET_EVENT.CONNECTION, (socket) => {
+  io.on(SOCKET_EVENT.CONNECT, (socket) => {
     handleConnection(socket, io, workers);
   });
 

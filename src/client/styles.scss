@@ -1,17 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
-
-// Импортируем Material Theme
 @use "@angular/material" as mat;
 
-// Включаем core стили
 @include mat.core();
 
-// Определяем палитру цветов
 $primary-palette: mat.m2-define-palette(mat.$m2-deep-purple-palette, 500);
 $accent-palette: mat.m2-define-palette(mat.$m2-pink-palette, 500);
 $warn-palette: mat.m2-define-palette(mat.$m2-red-palette, 500);
 
-// Создаем тему
 $theme: mat.m2-define-light-theme(
   (
     color: (
@@ -22,10 +16,8 @@ $theme: mat.m2-define-light-theme(
   )
 );
 
-// Применяем тему
 @include mat.all-component-themes($theme);
 
-// Глобальные стили
 * {
   margin: 0;
   padding: 0;
@@ -52,7 +44,6 @@ body {
   line-height: 1.5;
 }
 
-// Кастомные классы для SnackBar
 .success-snackbar {
   background: linear-gradient(45deg, #4caf50, #8bc34a) !important;
   color: white !important;
@@ -68,7 +59,6 @@ body {
   color: white !important;
 }
 
-// Улучшения для Material компонентов
 .mat-mdc-card {
   border-radius: 16px !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
@@ -90,13 +80,10 @@ body {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
 }
 
-// Улучшения для чипов
 .mat-mdc-chip {
   font-weight: 600 !important;
   border-radius: 16px !important;
 }
-
-// Кастомные анимации
 @keyframes mysticalGlow {
   0%,
   100% {
@@ -111,7 +98,6 @@ body {
   animation: mysticalGlow 2s ease-in-out infinite;
 }
 
-// Скроллбар
 ::-webkit-scrollbar {
   width: 8px;
 }
