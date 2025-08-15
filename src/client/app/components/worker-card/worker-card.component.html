@@ -7,37 +7,34 @@
       🔮 Session #{{ shortId() }}
     </mat-card-title>
     <mat-card-subtitle>
-      <mat-chip [color]="worker().status | statusColor" selected>
-        <mat-icon matChipAvatar>{{ worker().status | statusIcon }}</mat-icon>
-        {{ worker().status | statusText }}
-      </mat-chip>
+      <div class="worker-info">
+        <div class="info-row">
+          <mat-icon>schedule</mat-icon>
+          <span>{{ worker().startTime | date: "short" }}</span>
+        </div>
+        <div class="info-row">
+          <mat-icon>timer</mat-icon>
+          <span>{{ worker().startTime | uptime }}</span>
+        </div>
+      </div>
     </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
-    <div class="worker-info">
+    <!-- <div class="worker-info">
       <div class="info-row">
         <mat-icon>schedule</mat-icon>
-        <span>Started: {{ worker().startTime | date: "short" }}</span>
+        <span>{{ worker().startTime | date: "short" }}</span>
       </div>
       <div class="info-row">
         <mat-icon>timer</mat-icon>
-        <span>Uptime: {{ worker().startTime | uptime }}</span>
+        <span>{{ worker().startTime | uptime }}</span>
       </div>
-      <div class="info-row">
-        <mat-icon>receipt</mat-icon>
-        <span>Predictions: {{ totalPredictions() }}</span>
-      </div>
-    </div>
+    </div> -->
 
     <mat-divider></mat-divider>
 
     <div class="fortune-section">
-      <h4>
-        📜
-        {{ "All predictions" }}
-        ({{ totalPredictions() }}):
-      </h4>
       @let displayLogs = worker().logs | recentLogs;
       @if (displayLogs.length > 0) {
         <div class="fortune-logs">

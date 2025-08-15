@@ -46,5 +46,4 @@ export class WorkerCardComponent {
   isTerminated = computed(
     () => this.worker().status === WORKER_STATUS.TERMINATED,
   );
-  totalPredictions = computed(() => this.worker().logs?.length || 0);
 }

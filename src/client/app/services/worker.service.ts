@@ -108,11 +108,10 @@ export class WorkerService {
 
   private updateWorkerStatus(workerId: string, status: WORKER_STATUS) {
     const workers = this.workers();
-    const worker = workers.find((w) => w.id === workerId);
-    if (worker) {
-      worker.status = status;
-      this.workers.set([...workers]);
-    }
+    const updated = workers.map((w) =>
+      w.id === workerId ? { ...w, status } : w,
+    );
+    this.workers.set(updated);
   }
 
   private addWorkerLog(
@@ -120,13 +119,9 @@ export class WorkerService {
     log: { timestamp: Date; message: string },
   ) {
     const workers = this.workers();
-    const worker = workers.find((w) => w.id === workerId);
-    if (worker) {
-      if (!worker.logs) {
-        worker.logs = [];
-      }
-      worker.logs.push(log);
-      this.workers.set([...workers]);
-    }
+    const updated = workers.map((w) =>
+      w.id === workerId ? { ...w, logs: [...(w.logs ?? []), log] } : w,
+    );
+    this.workers.set(updated);
   }
 }
