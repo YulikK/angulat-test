@@ -1,21 +1,23 @@
 import { Server as SocketServer } from 'socket.io';
 import { METHODS, ServerWorkersMap, SOCKET_EVENT } from '../../shared/types.js';
-import { ENV } from '../../shared/constants/general.js';
+import { SERVER_ENV } from '../constants/environment.js';
 import { handleConnection } from './handlers/connection-handler.js';
 import { SERVER_MESSAGES } from '../../shared/constants/messages.js';
 
 export function createSocketServer(workers: ServerWorkersMap): SocketServer {
-  const io = new SocketServer(ENV.SOCKET_PORT, {
+  const io = new SocketServer(SERVER_ENV.SOCKET_PORT, {
     cors: {
-      origin: ['http://localhost:4200', 'http://localhost:8080', 'null'], // null для file:// протокола
+      origin: SERVER_ENV.CLIENT_URL,
       methods: [METHODS.GET, METHODS.POST],
-      credentials: false,
+      credentials: true,
     },
   });
 
-  console.log(SERVER_MESSAGES.SERVER_SOCKET_RUNNING(ENV.SOCKET_PORT));
+  console.log(SERVER_MESSAGES.SERVER_SOCKET_RUNNING(SERVER_ENV.SOCKET_PORT));
   console.log(
-    SERVER_MESSAGES.SERVER_ENVIRONMENT(ENV.PROD ? 'production' : 'development'),
+    SERVER_MESSAGES.SERVER_ENVIRONMENT(
+      SERVER_ENV.PROD ? 'production' : 'development',
+    ),
   );
 
   io.on(SOCKET_EVENT.CONNECTION, (socket) => {
