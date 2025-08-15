@@ -6,5 +6,6 @@ const { execSync } = require("child_process");
 try {
   execSync("ng lint --fix", { stdio: "inherit" });
 } catch (error) {
+  console.error("Linting failed:", error.message || error);
   process.exit(1);
 }
