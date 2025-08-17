@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { WORKER_STATUS, WorkerInfo } from '../../../../shared/types';
-import { UptimePipe, StatusIconPipe, RecentLogsPipe } from '../../shared/pipes';
+import { RecentLogsPipe } from '../../shared/pipes';
 
 @Component({
   selector: 'app-worker-card',
@@ -26,8 +26,6 @@ import { UptimePipe, StatusIconPipe, RecentLogsPipe } from '../../shared/pipes';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    UptimePipe,
-    StatusIconPipe,
     RecentLogsPipe,
   ],
   templateUrl: './worker-card.component.html',
@@ -35,6 +33,8 @@ import { UptimePipe, StatusIconPipe, RecentLogsPipe } from '../../shared/pipes';
 })
 export class WorkerCardComponent {
   worker = input.required<WorkerInfo>();
+  killWorker = input.required<(id: string) => void>();
+
   shortId = computed(() => this.worker().id.substring(0, 8));
   isTerminated = computed(
     () => this.worker().status === WORKER_STATUS.TERMINATED,

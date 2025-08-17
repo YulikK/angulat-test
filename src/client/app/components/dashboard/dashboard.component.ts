@@ -20,8 +20,10 @@ import {
   WORKER_STATUS,
   WorkerInfo,
 } from '../../../../shared/types';
-import { StatusConnectionIconPipe } from '../../shared/pipes/status-connection-icon.pipe';
-import { StatusConnectionTextPipe } from '../../shared/pipes/status-connection-text.pipe';
+import {
+  StatusConnectionIconPipe,
+  StatusConnectionTextPipe,
+} from '../../shared/pipes';
 
 @Component({
   selector: 'app-dashboard',
@@ -75,4 +77,6 @@ export class DashboardComponent {
       });
     }
   }
+
+  killWorker = (id: string) => this.workerService.killWorker(id);
 }

@@ -17,12 +17,14 @@
   }
 }
 
-.worker-avatar {
-  background: linear-gradient(45deg, #673ab7, #9c27b0);
-  color: white;
+.worker-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+}
+
+.terminate-button {
+  align-self: flex-start;
 }
 
 .worker-title {

@@ -78,7 +78,10 @@
     } @else {
       <div class="workers-grid">
         @for (worker of workers(); track worker.id) {
-          <app-worker-card [worker]="worker"></app-worker-card>
+          <app-worker-card
+            [worker]="worker"
+            [killWorker]="killWorker"
+          ></app-worker-card>
         }
       </div>
     }

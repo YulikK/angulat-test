@@ -1,8 +1,5 @@
 <mat-card class="worker-card" [class.terminated]="isTerminated()">
-  <mat-card-header>
-    <div mat-card-avatar class="worker-avatar">
-      <mat-icon>{{ worker().status | statusIcon }}</mat-icon>
-    </div>
+  <mat-card-header class="worker-header">
     <mat-card-title class="worker-title">
       🔮 Session #{{ shortId() }}
       <mat-icon>timer</mat-icon>
@@ -20,6 +17,18 @@
         </div>
       </div>
     </mat-card-subtitle>
+
+    @if (!isTerminated()) {
+      <button
+        mat-icon-button
+        color="warn"
+        class="terminate-button"
+        aria-label="Terminate session"
+        (click)="killWorker()(worker().id)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
   </mat-card-header>
 
   <mat-card-content>

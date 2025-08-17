@@ -1,5 +1,5 @@
-export { UptimePipe } from './uptime.pipe';
 export { StatusColorPipe } from './status-color.pipe';
-export { StatusIconPipe } from './status-icon.pipe';
 export { StatusTextPipe } from './status-text.pipe';
 export { RecentLogsPipe } from './recent-logs.pipe';
+export { StatusConnectionIconPipe } from './status-connection-icon.pipe';
+export { StatusConnectionTextPipe } from './status-connection-text.pipe';
