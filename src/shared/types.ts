@@ -44,7 +44,7 @@ export enum MESSAGE {
 export enum SOCKET_EVENT {
   CONNECTING = 'connecting',
   CONNECT = 'connect',
-  DISCONNECT = 'disconnected',
+  DISCONNECT = 'disconnect',
   MESSAGE = 'message',
   CONNECT_ERROR = 'connect error',
 }

@@ -41,6 +41,7 @@ export class WorkerService {
     });
 
     this.socket.on(SOCKET_EVENT.DISCONNECT, () => {
+      console.log(CLIENT_MESSAGES.CONNECTION_LOST);
       this.connectionStatus.set(SOCKET_EVENT.DISCONNECT);
     });
 
@@ -52,14 +53,6 @@ export class WorkerService {
       console.error(CLIENT_MESSAGES.CONNECTION_ERROR, error);
       this.connectionStatus.set(SOCKET_EVENT.CONNECT_ERROR);
     });
-  }
-
-  disconnect() {
-    if (this.socket) {
-      this.socket.disconnect();
-      this.socket = null;
-    }
-    this.connectionStatus.set(SOCKET_EVENT.DISCONNECT);
   }
 
   createWorker() {

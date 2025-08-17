@@ -2,8 +2,6 @@
   <mat-card-header class="worker-header">
     <mat-card-title class="worker-title">
       🔮 Session #{{ shortId() }}
-      <mat-icon>timer</mat-icon>
-      <span> {{ elapsedTime() }}</span>
     </mat-card-title>
     <mat-card-subtitle>
       <div class="worker-info">
@@ -14,6 +12,10 @@
           <span>{{
             worker().endTime ? (worker().endTime | date: "HH:mm:ss") : "..."
           }}</span>
+        </div>
+        <div class="info-row">
+          <mat-icon>timer</mat-icon>
+          <span> {{ elapsedTime() }}</span>
         </div>
       </div>
     </mat-card-subtitle>
