@@ -21,17 +21,6 @@
   </mat-card-header>
 
   <mat-card-content>
-    <!-- <div class="worker-info">
-      <div class="info-row">
-        <mat-icon>schedule</mat-icon>
-        <span>{{ worker().startTime | date: "short" }}</span>
-      </div>
-      <div class="info-row">
-        <mat-icon>timer</mat-icon>
-        <span>{{ worker().startTime | uptime }}</span>
-      </div>
-    </div> -->
-
     <mat-divider></mat-divider>
 
     <div class="fortune-section">
@@ -40,10 +29,10 @@
         <div class="fortune-logs">
           @for (log of displayLogs; track log.timestamp) {
             <div class="fortune-entry">
-              <div class="fortune-time">
+              <span class="fortune-time">
                 {{ log.timestamp | date: "HH:mm:ss" }}
-              </div>
-              <div class="fortune-text">{{ log.message }}</div>
+              </span>
+              <p class="fortune-text">{{ log.message }}</p>
             </div>
           }
         </div>

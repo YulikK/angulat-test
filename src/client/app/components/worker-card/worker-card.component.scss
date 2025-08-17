@@ -1,6 +1,9 @@
+:host {
+  width: 100%;
+}
+
 .worker-card {
   margin: 16px;
-  max-width: 400px;
   transition: transform 0.2s ease-in-out;
 
   &:hover:not(.terminated) {
@@ -57,6 +60,9 @@
 }
 
 .fortune-entry {
+  display: flex;
+  gap: 8px;
+  align-items: center;
   margin: 6px 0;
   padding: 8px 12px;
   background: #f3e5f5;
@@ -67,7 +73,6 @@
 .fortune-time {
   font-size: 0.8em;
   color: #666;
-  margin-bottom: 4px;
 }
 
 .fortune-text {
