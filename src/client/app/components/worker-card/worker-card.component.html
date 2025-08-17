@@ -5,16 +5,18 @@
     </div>
     <mat-card-title class="worker-title">
       🔮 Session #{{ shortId() }}
+      <mat-icon>timer</mat-icon>
+      <span> {{ elapsedTime() }}</span>
     </mat-card-title>
     <mat-card-subtitle>
       <div class="worker-info">
         <div class="info-row">
           <mat-icon>schedule</mat-icon>
-          <span>{{ worker().startTime | date: "short" }}</span>
-        </div>
-        <div class="info-row">
-          <mat-icon>timer</mat-icon>
-          <span>{{ worker().startTime | uptime }}</span>
+          <span>{{ worker().startTime | date: "HH:mm:ss" }}</span>
+          <span> - </span>
+          <span>{{
+            worker().endTime ? (worker().endTime | date: "HH:mm:ss") : "..."
+          }}</span>
         </div>
       </div>
     </mat-card-subtitle>

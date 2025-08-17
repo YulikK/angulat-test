@@ -28,6 +28,16 @@
 .worker-title {
   font-size: 1.2em;
   font-weight: 600;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  mat-icon {
+    color: #673ab7;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .worker-info {
@@ -40,13 +50,6 @@
   align-items: center;
   margin: 8px 0;
   gap: 8px;
-
-  mat-icon {
-    color: #673ab7;
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
-  }
 }
 
 .fortune-section h4 {

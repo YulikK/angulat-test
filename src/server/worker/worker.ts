@@ -68,6 +68,7 @@ if (parentPort) {
 }
 
 process.on(PROCESS_SIGNAL.SIGTERM, () => {
+  sendLog(SERVER_MESSAGES.WORKER_TERMINATED);
   isRunning = false;
   clearTimeout(logInterval);
   clearTimeout(lifetimeTimeout);

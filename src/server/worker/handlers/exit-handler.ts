@@ -17,11 +17,12 @@ export function handleWorkerExit(
   code: number | null,
 ): void {
   console.log(SERVER_MESSAGES.WORKER_EXIT(workerId, code));
+  workerInfo.endTime = new Date();
   workerInfo.status = WORKER_STATUS.TERMINATED;
 
   const serverMessage: ServerMessage = {
     type: MESSAGE.WORKER_TERMINATED,
-    workerId: workerId,
+    worker: workerInfo,
   };
   io.emit(SOCKET_EVENT.MESSAGE, serverMessage);
 

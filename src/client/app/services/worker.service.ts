@@ -5,7 +5,6 @@ import {
   ClientMessage,
   ServerMessage,
   MESSAGE,
-  WORKER_STATUS,
   SOCKET_EVENT,
   WORKER_EVENT,
 } from '../../../shared/types';
@@ -38,12 +37,10 @@ export class WorkerService {
     });
 
     this.socket.on(SOCKET_EVENT.CONNECT, () => {
-      console.log(CLIENT_MESSAGES.CONNECTION_ESTABLISHED);
       this.connectionStatus.set(SOCKET_EVENT.CONNECT);
     });
 
     this.socket.on(SOCKET_EVENT.DISCONNECT, () => {
-      console.log(CLIENT_MESSAGES.CONNECTION_LOST);
       this.connectionStatus.set(SOCKET_EVENT.DISCONNECT);
     });
 
@@ -80,8 +77,6 @@ export class WorkerService {
   }
 
   private handleServerMessage(data: ServerMessage) {
-    console.log(CLIENT_MESSAGES.WORKER_LIST_UPDATED, this.workers().length);
-
     switch (data.type) {
       case MESSAGE.WORKERS_LIST:
         this.updateWorkersList(data.workers);
@@ -93,7 +88,7 @@ export class WorkerService {
         this.addWorkerLog(data.workerId, data.log);
         break;
       case MESSAGE.WORKER_TERMINATED:
-        this.updateWorkerStatus(data.workerId, WORKER_STATUS.TERMINATED);
+        this.updateWorkerStatus(data.worker);
         break;
     }
   }
@@ -106,10 +101,10 @@ export class WorkerService {
     this.workers.set([...this.workers(), { ...worker }]);
   }
 
-  private updateWorkerStatus(workerId: string, status: WORKER_STATUS) {
+  private updateWorkerStatus(workerInfo: WorkerInfo) {
     const workers = this.workers();
     const updated = workers.map((w) =>
-      w.id === workerId ? { ...w, status } : w,
+      w.id === workerInfo.id ? { ...w, ...workerInfo } : w,
     );
     this.workers.set(updated);
   }

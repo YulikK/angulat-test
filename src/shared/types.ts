@@ -8,6 +8,7 @@ export enum WORKER_STATUS {
 export interface WorkerInfo {
   id: string;
   startTime: Date;
+  endTime?: Date;
   status: WORKER_STATUS;
   logs: WorkerLog[];
 }
@@ -64,7 +65,7 @@ export type ClientMessage =
 export type ServerMessage =
   | { type: MESSAGE.WORKER_STARTED; worker: WorkerInfo }
   | { type: MESSAGE.WORKER_LOG; workerId: string; log: WorkerLog }
-  | { type: MESSAGE.WORKER_TERMINATED; workerId: string }
+  | { type: MESSAGE.WORKER_TERMINATED; worker: WorkerInfo }
   | { type: MESSAGE.WORKERS_LIST; workers: WorkerInfo[] };
 
 export type WorkerThreadMessage =
