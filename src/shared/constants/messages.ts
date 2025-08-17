@@ -5,8 +5,6 @@
 
 export const SERVER_MESSAGES = {
   // Worker lifecycle messages
-  WORKER_CONNECTED: '🔮 Fortune teller connected and ready to predict!',
-  WORKER_SLEEPING: '🌙 Fortune teller is tired and going to sleep... Goodbye!',
   WORKER_TERMINATED: '🛑 Termination signal received. See you later!',
 
   // Server startup messages

@@ -26,7 +26,6 @@ const lifetime =
   WORKER_LIFETIME.MIN;
 
 const lifetimeTimeout: NodeJS.Timeout = setTimeout(() => {
-  sendLog(SERVER_MESSAGES.WORKER_SLEEPING);
   isRunning = false;
   process.exit(0);
 }, lifetime);
@@ -54,7 +53,6 @@ function scheduleNextLog() {
   }
 }
 
-sendLog(SERVER_MESSAGES.WORKER_CONNECTED);
 scheduleNextLog();
 
 if (parentPort) {
