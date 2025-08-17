@@ -75,22 +75,6 @@
           </div>
         </mat-card-content>
       </mat-card>
-    } @else if (totalWorkers() === 0) {
-      <mat-card class="empty-state-card">
-        <mat-card-content>
-          <div class="empty-state">
-            <div class="empty-icon">
-              <mat-icon>auto_awesome</mat-icon>
-            </div>
-            <h2>No active sessions yet</h2>
-            <p>
-              Click the button above to start your first session and get a
-              prediction.
-            </p>
-            <div class="mystical-symbols">✨ 🔮 🌟 💫 ⭐ 🌙</div>
-          </div>
-        </mat-card-content>
-      </mat-card>
     } @else {
       <div class="workers-grid">
         @for (worker of workers(); track worker.id) {
