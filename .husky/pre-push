@@ -1,0 +1,12 @@
+#!/bin/sh
+echo "🔍 Running pre-push checks..."
+
+echo "📦 Building server..."
+npm run build:server
+
+if [ $? -ne 0 ]; then
+  echo "❌ Server build failed!"
+  exit 1
+fi
+
+echo "✅ All pre-push checks passed!"

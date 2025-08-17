@@ -1,0 +1,81 @@
+{
+  "name": "worker-dashboard",
+  "version": "1.0.0",
+  "description": "Worker threads monitoring dashboard",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "cross-env NODE_ENV=development node -r dotenv/config node_modules/.bin/nodemon --watch src/server --ext ts --exec \"ts-node src/server/master.ts\"",
+    "client:dev": "cross-env NODE_ENV=development node -r dotenv/config node_modules/.bin/ng serve --port 4200",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cross-env NODE_ENV=production node -r dotenv/config node_modules/.bin/ng build --configuration=production --base-href=/angulat-test/ --output-path=dist/client",
+    "build:server": "tsc --project tsconfig.server.json",
+    "start": "cross-env NODE_ENV=production node -r dotenv/config dist/server/server/master.js",
+    "deploy:client": "npm run build:client && rm -rf gh-pages-tmp && mkdir gh-pages-tmp && cp -r dist/client/browser/* gh-pages-tmp/ && npx angular-cli-ghpages --dir=gh-pages-tmp",
+    "prepare": "husky",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
+    "format": "prettier --write \"src/**/*.{ts,html,scss,css,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,html,scss,css,json}\"",
+    "test": "ng test"
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.{ts,js}": [
+      "node lint-staged-script.js"
+    ],
+    "src/**/*.{html,scss,css,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/cdk": "^20.1.6",
+    "@angular/common": "^20.1.0",
+    "@angular/compiler": "^20.1.0",
+    "@angular/core": "^20.1.0",
+    "@angular/forms": "^20.1.0",
+    "@angular/material": "^20.1.6",
+    "@angular/platform-browser": "^20.1.0",
+    "@angular/router": "^20.1.0",
+    "rxjs": "~7.8.0",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^20.1.4",
+    "@angular/cli": "^20.1.4",
+    "@angular/compiler-cli": "^20.1.0",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.11.5",
+    "angular-cli-ghpages": "^2.0.3",
+    "angular-eslint": "20.1.1",
+    "concurrently": "^8.2.2",
+    "cross-env": "^10.0.0",
+    "dotenv": "^17.2.1",
+    "eslint": "^9.29.0",
+    "eslint-plugin-unicorn": "^60.0.0",
+    "husky": "^9.1.7",
+    "jasmine-core": "~5.8.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.1.5",
+    "nodemon": "^3.0.3",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.8.2",
+    "typescript-eslint": "8.34.1"
+  }
+}

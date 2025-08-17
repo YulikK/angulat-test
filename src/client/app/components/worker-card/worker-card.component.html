@@ -1,0 +1,60 @@
+<mat-card class="worker-card" [class.terminated]="isTerminated()">
+  <mat-card-header class="worker-header">
+    <mat-card-title class="worker-title">
+      🔮 Session #{{ shortId() }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <div class="worker-info">
+        <div class="info-row">
+          <mat-icon>schedule</mat-icon>
+          <span>{{ worker().startTime | date: "HH:mm:ss" }}</span>
+          <span> - </span>
+          <span>{{
+            worker().endTime ? (worker().endTime | date: "HH:mm:ss") : "..."
+          }}</span>
+        </div>
+        <div class="info-row">
+          <mat-icon>timer</mat-icon>
+          <span> {{ elapsedTime() }}</span>
+        </div>
+      </div>
+    </mat-card-subtitle>
+
+    @if (!isTerminated()) {
+      <button
+        mat-icon-button
+        color="warn"
+        class="terminate-button"
+        aria-label="Terminate session"
+        (click)="killWorker()(worker().id)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-divider></mat-divider>
+
+    <div class="fortune-section">
+      @let displayLogs = worker().logs | recentLogs;
+      @if (displayLogs.length > 0) {
+        <div class="fortune-logs">
+          @for (log of displayLogs; track log.timestamp) {
+            <div class="fortune-entry">
+              <span class="fortune-time">
+                {{ log.timestamp | date: "HH:mm:ss" }}
+              </span>
+              <p class="fortune-text">{{ log.message }}</p>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="no-fortunes">
+          <mat-icon>hourglass_empty</mat-icon>
+          <span>Session is ready...</span>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

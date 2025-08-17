@@ -1,0 +1,252 @@
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-attachment: fixed;
+}
+
+.main-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.toolbar-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 1.3em;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.control-panel {
+  margin: 24px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  mat-card-header {
+    padding-bottom: 16px;
+  }
+
+  mat-card-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #673ab7;
+    font-weight: 600;
+  }
+}
+
+.control-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.create-worker-btn {
+  font-size: 1.1em;
+  padding: 12px 24px;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(103, 58, 183, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:hover:not([disabled]) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(103, 58, 183, 0.4);
+  }
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+.stats-container {
+  mat-chip-set {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 32px 16px;
+  margin-top: 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(103, 58, 183, 0.1) 0%,
+    rgba(156, 39, 176, 0.1) 100%
+  );
+  border-radius: 16px;
+  border: 2px dashed rgba(103, 58, 183, 0.3);
+
+  .welcome-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #673ab7;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    color: #673ab7;
+    margin: 16px 0 8px 0;
+    font-weight: 600;
+  }
+
+  p {
+    color: #666;
+    margin: 0;
+    font-size: 1.1em;
+    line-height: 1.5;
+  }
+}
+
+.workers-section {
+  padding: 0 24px 24px;
+}
+
+.connection-status-card,
+.empty-state-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.connection-message,
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+
+  h3,
+  h2 {
+    color: #673ab7;
+    margin: 16px 0;
+    font-weight: 600;
+  }
+
+  p {
+    color: #666;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+}
+
+.connection-message {
+  mat-spinner {
+    margin: 0 auto 24px;
+  }
+}
+
+.empty-icon {
+  margin: 0 auto 24px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #673ab7, #9c27b0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(103, 58, 183, 0.3);
+
+  mat-icon {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    color: white;
+  }
+}
+
+.mystical-symbols {
+  font-size: 2em;
+  margin: 32px 0;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.workers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+  justify-items: center;
+  padding: 24px 0;
+}
+
+.status-connect {
+  background: linear-gradient(45deg, #4caf50, #8bc34a) !important;
+  color: white !important;
+}
+
+.status-disconnected {
+  background: linear-gradient(45deg, #f44336, #ff5722) !important;
+  color: white !important;
+}
+
+.status-connecting {
+  background: linear-gradient(45deg, #ff9800, #ffc107) !important;
+  color: white !important;
+}
+
+@media (max-width: 768px) {
+  .control-panel {
+    margin: 16px;
+  }
+
+  .control-row {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .workers-grid {
+    grid-template-columns: 1fr;
+    padding: 16px 0;
+    gap: 16px;
+  }
+
+  .workers-section {
+    padding: 0 16px 16px;
+  }
+
+  .toolbar-title {
+    font-size: 1.1em;
+  }
+
+  .create-worker-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar-title span {
+    display: none;
+  }
+
+  .control-panel,
+  .workers-section {
+    margin: 8px;
+    padding: 0 8px 8px;
+  }
+}

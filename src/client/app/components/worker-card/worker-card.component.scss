@@ -1,0 +1,96 @@
+:host {
+  width: 100%;
+}
+
+.worker-card {
+  margin: 16px;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover:not(.terminated) {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  &.terminated {
+    opacity: 0.7;
+    filter: grayscale(30%);
+  }
+}
+
+.worker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.terminate-button {
+  align-self: flex-start;
+}
+
+.worker-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  mat-icon {
+    color: #673ab7;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.worker-info {
+  display: flex;
+  gap: 10px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  gap: 8px;
+}
+
+.fortune-section h4 {
+  margin: 12px 0 8px 0;
+  color: #673ab7;
+  font-size: 1em;
+}
+
+.fortune-logs {
+  overflow-y: auto;
+}
+
+.fortune-entry {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 6px 0;
+  padding: 8px 12px;
+  background: #f3e5f5;
+  border-radius: 8px;
+  border-left: 3px solid #9c27b0;
+}
+
+.fortune-time {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.fortune-text {
+  font-style: italic;
+  color: #4a148c;
+  line-height: 1.4;
+}
+
+.no-fortunes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #999;
+  font-style: italic;
+  padding: 16px 0;
+}

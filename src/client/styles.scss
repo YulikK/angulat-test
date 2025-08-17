@@ -1,0 +1,117 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$primary-palette: mat.m2-define-palette(mat.$m2-deep-purple-palette, 500);
+$accent-palette: mat.m2-define-palette(mat.$m2-pink-palette, 500);
+$warn-palette: mat.m2-define-palette(mat.$m2-red-palette, 500);
+
+$theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $primary-palette,
+      accent: $accent-palette,
+      warn: $warn-palette,
+    ),
+  )
+);
+
+@include mat.all-component-themes($theme);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family:
+    "Roboto",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-attachment: fixed;
+  line-height: 1.5;
+}
+
+.success-snackbar {
+  background: linear-gradient(45deg, #4caf50, #8bc34a) !important;
+  color: white !important;
+}
+
+.error-snackbar {
+  background: linear-gradient(45deg, #f44336, #ff5722) !important;
+  color: white !important;
+}
+
+.info-snackbar {
+  background: linear-gradient(45deg, #673ab7, #9c27b0) !important;
+  color: white !important;
+}
+
+.mat-mdc-card {
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.mat-mdc-button {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+}
+
+.mat-mdc-raised-button {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.mat-mdc-raised-button:hover:not([disabled]) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+.mat-mdc-chip {
+  font-weight: 600 !important;
+  border-radius: 16px !important;
+}
+@keyframes mysticalGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(156, 39, 176, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(156, 39, 176, 0.6);
+  }
+}
+
+.mystical-glow {
+  animation: mysticalGlow 2s ease-in-out infinite;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #673ab7, #9c27b0);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5e35b1, #8e24aa);
+}

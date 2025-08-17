@@ -1,0 +1,89 @@
+<div class="dashboard-container">
+  <mat-toolbar color="primary" class="main-toolbar">
+    <span class="toolbar-title">
+      <mat-icon class="title-icon">auto_awesome</mat-icon>
+      🔮 Magic Sessions Center
+    </span>
+    <div class="toolbar-spacer"></div>
+    <mat-chip-set>
+      <mat-chip [class]="'status-' + connectionStatus()" [disabled]="false">
+        <mat-icon matChipAvatar>{{
+          connectionStatus() | statusConnectionIcon
+        }}</mat-icon>
+        {{ connectionStatus() | statusConnectionText }}
+      </mat-chip>
+    </mat-chip-set>
+  </mat-toolbar>
+
+  <mat-card class="control-panel">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>dashboard</mat-icon>
+        Control Panel
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="control-row">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!isConnected()"
+          (click)="createWorker()"
+          class="create-worker-btn"
+        >
+          <mat-icon>add_circle</mat-icon>
+          Start New Session
+        </button>
+
+        <div class="stats-container">
+          <mat-chip-set>
+            <mat-chip selected>
+              <mat-icon matChipAvatar>groups</mat-icon>
+              Total: {{ totalWorkers() }}
+            </mat-chip>
+            <mat-chip color="accent" selected>
+              <mat-icon matChipAvatar>play_circle</mat-icon>
+              Active: {{ activeWorkers() }}
+            </mat-chip>
+            <mat-chip color="warn" selected>
+              <mat-icon matChipAvatar>stop_circle</mat-icon>
+              Finished: {{ terminatedWorkers() }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+      </div>
+
+      @if (isConnected() && totalWorkers() === 0) {
+        <div class="welcome-message">
+          <mat-icon class="welcome-icon">sentiment_satisfied_alt</mat-icon>
+          <h3>Welcome to the Magic Sessions Center!</h3>
+          <p>Here you can start sessions to receive mystical predictions.</p>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+
+  <div class="workers-section">
+    @if (!isConnected()) {
+      <mat-card class="connection-status-card">
+        <mat-card-content>
+          <div class="connection-message">
+            <mat-spinner diameter="40"></mat-spinner>
+            <h3>Connecting to the server...</h3>
+            <p>Please wait while the connection is being established</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <div class="workers-grid">
+        @for (worker of workers(); track worker.id) {
+          <app-worker-card
+            [worker]="worker"
+            [killWorker]="killWorker"
+          ></app-worker-card>
+        }
+      </div>
+    }
+  </div>
+</div>
