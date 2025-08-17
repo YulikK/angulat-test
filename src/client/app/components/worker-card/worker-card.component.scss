@@ -46,19 +46,14 @@
   }
 }
 
-.fortune-section {
-  margin-top: 16px;
-
-  h4 {
-    margin: 12px 0 8px 0;
-    color: #673ab7;
-    font-size: 1em;
-  }
+.fortune-section h4 {
+  margin: 12px 0 8px 0;
+  color: #673ab7;
+  font-size: 1em;
 }
 
 .fortune-logs {
   overflow-y: auto;
-  padding: 8px 0;
 }
 
 .fortune-entry {

@@ -11,13 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { WORKER_STATUS, WorkerInfo } from '../../../../shared/types';
-import {
-  UptimePipe,
-  StatusColorPipe,
-  StatusIconPipe,
-  StatusTextPipe,
-  RecentLogsPipe,
-} from '../../shared/pipes';
+import { UptimePipe, StatusIconPipe, RecentLogsPipe } from '../../shared/pipes';
 
 @Component({
   selector: 'app-worker-card',
@@ -32,9 +26,7 @@ import {
     MatDividerModule,
     MatButtonModule,
     UptimePipe,
-    StatusColorPipe,
     StatusIconPipe,
-    StatusTextPipe,
     RecentLogsPipe,
   ],
   templateUrl: './worker-card.component.html',

@@ -12,7 +12,7 @@ export class StatusIconPipe implements PipeTransform {
       case WORKER_STATUS.RUNNING:
         return 'play_circle';
       case WORKER_STATUS.TERMINATED:
-        return 'cancel';
+        return 'done';
       default:
         return 'help';
     }
