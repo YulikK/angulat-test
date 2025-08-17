@@ -10,7 +10,7 @@
     "build:client": "cross-env NODE_ENV=production node -r dotenv/config node_modules/.bin/ng build --configuration=production --base-href=/angulat-test/ --output-path=dist/client",
     "build:server": "tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node -r dotenv/config dist/server/server/master.js",
-    "deploy:client": "npm run build:client && npx angular-cli-ghpages --dir=dist/client",
+    "deploy:client": "npm run build:client && rm -rf gh-pages-tmp && mkdir gh-pages-tmp && cp -r dist/client/browser/* gh-pages-tmp/ && npx angular-cli-ghpages --dir=gh-pages-tmp",
     "prepare": "husky",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
