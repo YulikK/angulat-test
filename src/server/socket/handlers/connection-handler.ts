@@ -23,7 +23,7 @@ export function handleConnection(
   socket.emit(SOCKET_EVENT.MESSAGE, welcomeMessage);
 
   socket.on(SOCKET_EVENT.MESSAGE, (message) => {
-    handleClientMessage(socket, io, workers, message);
+    handleClientMessage(io, workers, message);
   });
 
   socket.on(SOCKET_EVENT.DISCONNECT, () => {

@@ -1,4 +1,4 @@
-import { Server as SocketServer, Socket } from 'socket.io';
+import { Server as SocketServer } from 'socket.io';
 import {
   ClientMessage,
   MESSAGE,
@@ -11,7 +11,6 @@ import { killWorker } from '../../worker/kill-worker.js';
 import { SERVER_MESSAGES } from '../../../shared/constants/messages.js';
 
 export function handleClientMessage(
-  socket: Socket,
   io: SocketServer,
   workers: ServerWorkersMap,
   message: ClientMessage,
